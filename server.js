@@ -3,6 +3,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import inventoryRoutes from './routes/inventoryRoutes.js';
+import authRoutes from './routes/authRoutes.js';
 
 // Load environment variables
 dotenv.config();
@@ -48,6 +49,7 @@ mongoose.connection.on('error', (error) => {
 });
 
 // Routes
+app.use('/api/auth', authRoutes);
 app.use('/api/inventory', inventoryRoutes);
 
 // Health check endpoint
