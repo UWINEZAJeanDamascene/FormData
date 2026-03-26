@@ -1,8 +1,8 @@
 import { InventoryModel } from '../models/inventoryModel.js';
 
 export const inventoryController = {
-  // GET /api/inventory - Get all items
-  getAllItems: async (req, res) => {
+  // GET /api/inventory - Get all items 
+  getAllItems: async (req, res) => { 
     try {
       const items = await InventoryModel.getAll();
       res.json({
