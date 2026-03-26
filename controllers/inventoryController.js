@@ -69,10 +69,17 @@ export const inventoryController = {
   // POST /api/inventory - Create new item
   createItem: async (req, res) => {
     try {
-      const itemData = req.body;
+      let itemData = req.body;
+      
+      // Auto-generate productId if not provided
+      if (!itemData.productId) {
+        const timestamp = Date.now().toString(36).toUpperCase();
+        const random = Math.random().toString(36).substring(2, 6).toUpperCase();
+        itemData.productId = `PRD-${timestamp}-${random}`;
+      }
       
       // Validation
-      if (!itemData.productId || !itemData.productName || !itemData.category) {
+      if (!itemData.productName || !itemData.category) {
         return res.status(400).json({
           success: false,
           message: 'Missing required fields'
