@@ -4,6 +4,8 @@ import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import inventoryRoutes from './routes/inventoryRoutes.js';
 import authRoutes from './routes/authRoutes.js';
+import categoryRoutes from './routes/categoryRoutes.js';
+import { seedDefaultCategories } from './controllers/categoryController.js';
 
 // Load environment variables
 dotenv.config();
@@ -64,6 +66,10 @@ mongoose.connection.on('error', (error) => {
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/inventory', inventoryRoutes);
+app.use('/api/categories', categoryRoutes);
+
+// Seed default categories on startup
+seedDefaultCategories();
 
 // Health check endpoint
 app.get('/health', (req, res) => {
